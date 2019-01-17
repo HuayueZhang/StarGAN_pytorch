@@ -8,11 +8,9 @@ class TBVisualizer:
     def __init__(self, opt):
         self.opt = opt
         self.save_path = os.path.join(opt.save_dir, opt.log_folder)
-
         self.log_path = os.path.join(self.save_path, 'loss_log.txt')
         self.tb_path = os.path.join(self.save_path, 'summaty.josn')
         self.writer = SummaryWriter(self.save_path)
-
         with open(self.log_path, "a") as log_file:
             log_file.write('============ Training Loss =============')
 
@@ -25,16 +23,13 @@ class TBVisualizer:
 
     def image(self, tag, image, global_step, opt):
         self.writer.add_image(tag, image, global_step, dataformats='HWC')
-
         # save image
         image = image * 255.
         image = image.astype(np.uint8)
         manifold_img_PIL = Image.fromarray(image)
-
         filename = 'sample_iter_%d.png' % global_step
         savepath = os.path.join(opt.save_dir, opt.sample_folder, filename)
         manifold_img_PIL.save(savepath)
-
 
     def log_and_print(self, message):
         print(message)

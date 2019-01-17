@@ -30,7 +30,6 @@ class myDataset(Dataset):
         lines = lines[2: ]
         random.seed(1234)
         random.shuffle(lines)
-
         num_train_batches = int(len(lines) * self.opt.spilt_ratio / self.opt.batch_size)
         num_train = num_train_batches * self.opt.batch_size
         num_test_batches = int((len(lines) - num_train) / self.opt.batch_size)

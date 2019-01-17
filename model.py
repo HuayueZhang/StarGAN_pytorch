@@ -43,7 +43,6 @@ class StarGAN:
         self.sample_c_trg_list= self._create_fix_trg_label(self.c_org)
         self.sample_gotten = True
 
-
     def _create_fix_trg_label(self, c_org):
         # eval的时候，希望看到固定初始图片被转换成固定的其他样子=>设置固定的target domain labels
         # test的时候，也要这样为测试图片选择固定的目标域
@@ -69,7 +68,6 @@ class StarGAN:
 
             c_trg_list.append(c_trg)
         return c_trg_list
-
 
     def set_inputs(self, data):
         img_real, labels_org = data
@@ -108,7 +106,6 @@ class StarGAN:
 
         return loss_D
 
-
     def _optimize_G(self, visualize=True):
         # forward
         img_fake = self.G_net(self.img_real, self.c_trg)
@@ -134,9 +131,7 @@ class StarGAN:
         self.writer.scalar('loss_G_cls', loss_G_cls, self.global_step)
         self.writer.scalar('loss_G_rec', loss_G_rec, self.global_step)
         self.writer.scalar('loss_G', loss_G, self.global_step)
-
         return loss_G
-
 
     def eval_sample(self):
         if not self.sample_gotten:
@@ -147,7 +142,6 @@ class StarGAN:
             sample_fake_list.append(sample_fake)
 
         return sample_fake_list
-
 
     def optimizer(self):
         self.global_step += 1
